@@ -2,11 +2,11 @@
 <description>Index sequences in the FASTA format</description>
 <command>bwa index -p $prefix -a $bwt_constr_algo $cflag $name64 $fasta_input</command>
 <inputs>
-    <param name="prefix" type="text" label="Prefix of the output database [same as db filename]" optional="true" />
-    <param name="bwt_constr_algo" type="select" label="BWT construction algorithm">
-        <option value="bwtsw">bwtsw</option>
-        <option value="is">is</option>
-    </param>
+        <param name="prefix" type="text" label="Prefix of the output database [same as db filename]" optional="true" />
+        <param name="bwt_constr_algo" type="select" label="BWT construction algorithm">
+            <option value="bwtsw">bwtsw</option>
+            <option value="is">is</option>
+        </param>
     <param name="cflag" type="select" label="Build color-space index. The input fast should be in nucleotide space">
         <option value=" ">No</option>
         <option value="-c">Yes</option>

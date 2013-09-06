@@ -1,6 +1,33 @@
 <tool id="bwa_aln" name="BWA Align" version="2-r126">
 <description>Index sequences in the FASTA format</description>
-<command>bwa aln -n $n -o $o -e $e -i $i -d $d -l $l -k $k -m $m -t $t -M $M -O $O -E $E -R $R -q $q -f $f -B $B -L $L -N $N -I $I -b $b -0 $0 -1 $1 -2 $2 -Y $Y $prefix $inputfile</command>
+<command>bwa aln \&#10;
+    -n $n `# -n max #diff (integer) or missing prob under 0.02 err rate (float) [0.04]` \&#10;
+    -o $o `# -o maximum number or fraction of gap opens [1]` \&#10;
+    -e $e `# -e maximum number of gap extensions, -1 for disabling long gaps [-1]` \&#10;
+    -i $i `# -i do not put an indel within integer bp towards the ends [5]` \&#10;
+    -d $d `# -d maximum occurrences for extending a long deletion [10]` \&#10;
+    -l $l `# -l seed length [32]` \&#10;
+    -k $k `# -k maximum differences in the seed [2]` \&#10;
+    -m $m `# -m maximum entries in the queue [2000000]` \&#10;
+    -t $t `# -t number of threads [1]` \&#10;
+    -M $M `# -M mismatch penalty [3]` \&#10;
+    -O $O `# -O gap open penalty [11]` \&#10;
+    -E $E `# -E gap extension penalty [4]` \&#10;
+    -R $R `# -R stop searching when there are >integer equally best hits [30]` \&#10;
+    -q $q `# -q quality threshold for read trimming down to 35bp [0]` \&#10;
+    -f $f `# -f file to write output to instead of stdout` \&#10;
+    -B $B `# -B length of barcode` \&#10;
+    -L $L `# -L log-scaled gap penalty for long deletions` \&#10;
+    -N $N `# -N non-iterative mode: search for all n-difference hits (slooow)` \&#10;
+    -I $I `# -I the input is in the Illumina 1.3+ FASTQ-like format` \&#10;
+    -b $b `# -b the input read file is in the BAM format` \&#10;
+    -0 $0 `# -0 use single-end reads only (effective with -b)` \&#10;
+    -1 $1 `# -1 use the 1st read in a pair (effective with -b)` \&#10;
+    -2 $2 `# -2 use the 2nd read in a pair (effective with -b)` \&#10;
+    -Y $Y `# -Y filter Casava-filtered sequences` \&#10;
+    -prefix $prefix `# -prefix Prefix` \&#10;
+    -inputfile $inputfile `# -inputfile Input file (FastQ format)` \&#10;
+</command>
 <inputs>
          <param name="n" type="float" label="max #diff (integer) or missing prob under 0.02 err rate (float) [0.04]" optional="true" />
          <param name="o" type="integer" label="maximum number or fraction of gap opens [1]" optional="true" />

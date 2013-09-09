@@ -1,0 +1,29 @@
+<tool id="bwa_samse" name="BWA SAMSE" version="2-r126">
+<description>Generate alignments in the SAM format given single-end reads. Repetitive hits will be randomly chosen.</description>
+<command>
+bwa samse -n $maxOcc -r $readgroup $in.db.fasta $in.sai $in.fastq &gt; $out.sam&#10;
+# -------------------------------------------------------------------------&#10;
+# bwa samse [-n maxOcc] &lt;in.db.fasta&gt; &lt;in.sai&gt; &lt;in.fq&gt; &gt; &lt;out.sam&gt;&#10;
+# &#160; Generate alignments in the SAM format given single-end reads. &#10;
+# &#160; Repetitive hits will be randomly chosen.&#10;
+# Flags:&#10;
+# &#160; -n &#160;Maximum number of alignments to output in the XA tag for reads paired &#10;
+# &#160;&#160;&#160;&#160;&#160; properly. If a read has more than INT hits, the XA tag will not be &#10;
+# &#160;&#160;&#160;&#160;&#160; written. [3]&#10;
+# &#160; -r &#160;Specify the read group in a format like `@RG\tID:foo\tSM:bar'. [null]&#10;
+# Example:&#10;
+# &#160; bwa samse database.fasta aln_sa.sai short_read.fastq > aln.sam&#10;
+# -------------------------------------------------------------------------&#10;
+</command>
+<inputs>
+    <param name="maxOcc" type="integer" optional="true" label="Maximum number of alignments to output in the XA tag for reads paired properly. If a read has more than INT hits, the XA tag will not be written. [3]" />
+    <param name="readgroup" type="string" optional="true" label="Specify the read group in a format like `@RG\tID:foo\tSM:bar'. [null]" />
+    <param name="in.db.fasta" type="data" label="Input FASTA file" optional="false" />
+    <param name="in.sai" type="data" label="Input SAI (intermediate index) file" optional="false" />
+    <param name="in.fastq" type="data" label="Input FastQ file" optional="false" />
+</inputs>
+<outputs>
+    <data name="out.sam" label="Output SAM file" optional="false" />
+</outputs>
+</tool>
+ 

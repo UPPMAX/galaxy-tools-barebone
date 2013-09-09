@@ -1,6 +1,11 @@
 <tool id="bwa_sampe" name="BWA SAMPE" version="2-r126">
 <description>Generate alignments in the SAM format given paired-end reads. Repetitive read pairs will be placed randomly.</description>
 <command>
+bwa sampe -a $maxInsSize -o $maxOcc -n $maxHitPaired -N $maxHitDis $P -r $readGroup \&#10;
+   $in.db.fasta $in1.sai $in2.sai $in1.fq $in2.fq &gt; $out.sam
+
+# -------------------------------------------------------------------------&#10;
+# BWA SAMPE - Command Documentation&#10;
 # -------------------------------------------------------------------------&#10;
 # bwa sampe [-a maxInsSize] [-o maxOcc] [-n maxHitPaired] [-N maxHitDis] [-P] \&#10;
 #   &lt;in.db.fasta&gt; &lt;in1.sai&gt; &lt;in2.sai&gt; &lt;in1.fq&gt; &lt;in2.fq&gt; &gt; &lt;out.sam&gt;&#10;
@@ -14,27 +19,34 @@
 #   -o INT  Maximum occurrences of a read for pairing. A read with more&#10;
 #           occurrences will be treated as a single-end read. Reducing this&#10;
 #           parameter helps faster pairing. [100000]&#10;
-#   -P      Load the entire FM-index into memory to reduce disk operations&#10;
-#           (base-space reads only). With this option, at least 1.25N bytes of&#10;
-#           memory are required, where N is the  length of the genome.&#10;
 #   -n INT  Maximum number of alignments to output in the XA tag for reads&#10;
 #           paired properly. If a read has more than INT hits, the XA tag will&#10;
 #           not be written. [3]&#10;
 #   -N INT  Maximum  number  of alignments to output in the XA tag for&#10;
 #           disconcordant read pairs (excluding singletons). If a read has more&#10;
 #           than INT hits, the XA tag will not be written. [10]&#10;
+#   -P      Load the entire FM-index into memory to reduce disk operations&#10;
+#           (base-space reads only). With this option, at least 1.25N bytes of&#10;
+#           memory are required, where N is the  length of the genome.&#10;
 #   -r STR  Specify the read group in a format like `@RG\tID:foo\tSM:bar'.&#10;
 #           [null]&#10;
 # -------------------------------------------------------------------------&#10;
-bwa sampe -a $maxInsSize -o $maxOcc -n $maxHitPaired -N $maxHitDis $P \&#10;
-   $in.db.fasta $in1.sai $in2.sai $in1.fq $in2.fq &gt; $out.sam
 </command>
 <inputs>
-    <param name="" type="" optional="" label="" />
-    <param name="" type="data" label="" />
+    <param name="maxInsSize" type="integer" optional="true" label="Maximum  insert size for a read pair to be considered being mapped properly. [500]" />
+    <param name="maxOcc" type="integer" optional="true" label="Maximum occurrences of a read for pairing. [100000]" />
+    <param name="maxHitPaired" type="integer" optional="true" label="Maximum  number  of alignments to output in the XA tag for reads paired properly. [3]" />
+    <param name="maxHitDis" type="integer" optional="true" label="Maximum  number  of alignments to output in the XA tag for disconcordant read pairs (excluding singletons). [10]" />
+    <param name="P" type="boolean" truevalue="-P" falsevalue="" label="Load the entire FM-index into memory to reduce disk operations (base-space reads only)." />
+    <param name="readGroup" type="text" optional="true" label="Specify the read group in a format like `@RG\tID:foo\tSM:bar'" />
+    <param name="in.db.fasta" type="data" label="Input FASTA file" />
+    <param name="in1.sai" type="data" label="SAI file #1" optional="false" />
+    <param name="in2.sai" type="data" label="SAI file #2" optional="false" />
+    <param name="in1.fq" type="data" label="FastQ file #1" optional="false" />
+    <param name="in2.fq" type="data" label="FastQ file #2" optional="false" />
 </inputs>
 <outputs>
-    <data name="" label="" optional="" />
+    <data name="out.sam" label="Output SAM file" optional="false" />
 </outputs>
 </tool>
  

@@ -1,0 +1,40 @@
+<tool id="bwa_sampe" name="BWA SAMPE" version="2-r126">
+<description>Generate alignments in the SAM format given paired-end reads. Repetitive read pairs will be placed randomly.</description>
+<command>
+# -------------------------------------------------------------------------&#10;
+# bwa sampe [-a maxInsSize] [-o maxOcc] [-n maxHitPaired] [-N maxHitDis] [-P] \
+#   &lt;in.db.fasta&gt; &lt;in1.sai&gt; &lt;in2.sai&gt; &lt;in1.fq&gt; &lt;in2.fq&gt; &gt; &lt;out.sam&gt;
+#   Generate alignments in the SAM format given paired-end reads. Repetitive read 
+#   pairs will be placed randomly.
+# OPTIONS:
+#   -a INT  Maximum  insert size for a read pair to be considered being mapped 
+#           properly. Since 0.4.5, this option is only used when there are not 
+#           enough good alignment to infer the distribution of insert sizes. 
+#           [500]
+#   -o INT  Maximum occurrences of a read for pairing. A read with more 
+#           occurrences will be treated as a single-end read. Reducing this 
+#           parameter helps faster pairing. [100000]
+#   -P      Load the entire FM-index into memory to reduce disk operations 
+#           (base-space reads only). With this option, at least 1.25N bytes of 
+#           memory are required, where N is the  length of the genome.
+#   -n INT  Maximum number of alignments to output in the XA tag for reads 
+#           paired properly. If a read has more than INT hits, the XA tag will 
+#           not be written. [3]
+#   -N INT  Maximum  number  of alignments to output in the XA tag for 
+#           disconcordant read pairs (excluding singletons). If a read has more 
+#           than INT hits, the XA tag will not be written. [10]
+#   -r STR  Specify the read group in a format like `@RG\tID:foo\tSM:bar'. 
+#           [null]
+# -------------------------------------------------------------------------&#10;
+bwa sampe -a $maxInsSize -o $maxOcc -n $maxHitPaired -N $maxHitDis $P \&#10;
+   $in.db.fasta $in1.sai $in2.sai $in1.fq $in2.fq &gt; $out.sam
+</command>
+<inputs>
+    <param name="" type="" optional="" label="" />
+    <param name="" type="data" label="" />
+</inputs>
+<outputs>
+    <data name="" label="" optional="" />
+</outputs>
+</tool>
+ 

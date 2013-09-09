@@ -1,0 +1,27 @@
+<tool id="bwa_fastmap" name="BWA FastMap" version="2-r126">
+<description>(No description available)</description>
+<command>
+bwa fastmap $s -l $minLen -w $maxSaSize $idxbase $in.fq &#10;
+&#10;
+# -----------------------------------------------------------------------------&#10;
+# BWA FastMap - Command Documentation&#10;
+# -----------------------------------------------------------------------------&#10;
+# (No description available)&#10;
+#&#10;
+# USAGE:&#10;
+# bwa fastmap $s -l $minLen(17) -w $maxSaSize(20) $idxbase $in.fq&#10;
+# -----------------------------------------------------------------------------&#10;
+</command>
+<inputs>
+    <!-- Value parameters -->
+        <param name="s" type="boolean" truevalue="-s" falsevalue="" label="-s" />
+        <param name="minLen" type="integer" optional="true" label="minLen [17]" />
+        <param name="maxSaSize" type="integer" optional="true" label="maxSaSize [20]" />
+    <!-- /Value parameters -->
+    <!-- Data parameters -->
+        <param name="idxbase" type="data" optional="false" label="idxbase" />
+        <param name="in.fq" type="data" optional="false" label="in.fq" />
+    <!-- /Data parameters -->
+</inputs>
+</tool>
+ 
